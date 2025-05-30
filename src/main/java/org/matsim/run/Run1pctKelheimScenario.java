@@ -6,7 +6,7 @@ import org.matsim.analysis.KelheimMainModeIdentifier;
 import org.matsim.analysis.ModeChoiceCoverageControlerListener;
 import org.matsim.analysis.personMoney.PersonMoneyEventsAnalysisModule;
 import org.matsim.api.core.v01.Scenario;
-import org.matsim.api.core.v01.network.Link;
+import org.matsim.api.core.v01.network.*;
 import org.matsim.contrib.vsp.pt.fare.DistanceBasedPtFareParams;
 import org.matsim.contrib.vsp.pt.fare.PtFareConfigGroup;
 import org.matsim.contrib.vsp.pt.fare.PtFareModule;
@@ -32,9 +32,6 @@ import java.util.*;
 import org.matsim.api.core.v01.Id;
 import org.matsim.api.core.v01.TransportMode;
 import org.matsim.api.core.v01.network.Link;
-import org.matsim.api.core.v01.network.Network;
-import org.matsim.api.core.v01.network.NetworkFactory;
-import org.matsim.api.core.v01.network.Node;
 import org.matsim.api.core.v01.Coord;
 
 import java.util.Set;
@@ -114,6 +111,8 @@ public class Run1pctKelheimScenario {
 		addBridge(scenario.getNetwork());
 		ModifyMainStreetLinks(scenario.getNetwork());
 		ModifyBridgeLinks(scenario.getNetwork());
+
+		new NetworkWriter(scenario.getNetwork()).write("output/output-kelheim-v3.1-1pct-XDPolicy/kelheim-v3.1-1pct.output_network.xml.gz");
 		// ======= Load & adapt controller ======
 		Controller controller = ControllerUtils.createController(scenario);
 
@@ -138,7 +137,7 @@ public class Run1pctKelheimScenario {
 	public static void addBridge(Network network) {
 		NetworkFactory factory = network.getFactory();
 
-		Id<Node> nodeId1 = Id.createNodeId("306169197");
+		Id<Node> nodeId1 = Id.createNodeId("293670680");
 		Id<Node> nodeId2 = Id.createNodeId("306169197");
 		Id<Link> linkId1 = Id.createLinkId("myNewBridge");
 		Id<Link> linkId2 = Id.createLinkId("myNewBridgeReverseDirection");
